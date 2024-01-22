@@ -1,9 +1,11 @@
+require('fs').createWriteStream('02-write-file/text.txt');
+
 process.stdout.write('hello! enter your text please...\n');
 
 process.stdin.on('data', (data) => {
   data.toString().trim() === 'exit'
     ? process.exit()
-    : require('fs').createWriteStream('02-write-file/text.txt').write(data);
+    : require('fs').promises.appendFile('02-write-file/text.txt', data);
 });
 
 process.on('SIGINT', process.exit);
