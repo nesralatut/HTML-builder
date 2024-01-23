@@ -8,9 +8,13 @@ require('fs').readdir(
           `03-files-in-folder/secret-folder/${file.name}`,
           (_, stat) => {
             process.stdout.write(
-              file.name.split('.')[0] +
+              require('path').parse(
+                `03-files-in-folder/secret-folder/${file.name}`
+              ).name +
                 ' - ' +
-                file.name.split('.')[1] +
+                require('path')
+                  .parse(`03-files-in-folder/secret-folder/${file.name}`)
+                  .ext.slice(1) +
                 ' - ' +
                 stat.size +
                 ' bytes\n'
